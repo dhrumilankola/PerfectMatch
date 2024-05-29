@@ -1,0 +1,37 @@
+# Python
+*.py[cod]
+__pycache__/
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.pyc
+
+# Django
+*.log
+*.pot
+*.mo
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+media
+
+# Environments
+.env
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Django Static and Media files
+/static/
+media/
+
+# VS Code
+.vscode/
+
+# MySQL files
+*.sql
+*.sqlite3

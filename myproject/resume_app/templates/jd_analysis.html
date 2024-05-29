@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JD Analysis - PerfectMatch</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'myapp/styles.css' %}">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">PerfectMatch</div>
+            <div class="nav-links">
+                <a href="{% url 'home' %}">Home</a>
+                <a href="{% url 'resume-optimiser' %}">Resume Optimiser</a>
+                <a href="{% url 'jd-analysis' %}">JD Analysis</a>
+            </div>
+        </nav>
+    </header>
+    <section class="main-content">
+        <h1>Job Description Analysis</h1>
+        <form method="POST" action="{% url 'jd-analysis' %}">
+            {% csrf_token %}
+            <textarea name="input" placeholder="Paste your job description here..."></textarea>
+            <button type="submit">Analyze</button>
+        </form>
+        {% if response %}
+            <div class="response">
+                {{ response|safe }}
+            </div>
+        {% endif %}
+    </section>
+    <footer>
+        <p>&copy; 2024 Your Name. All rights reserved.</p>
+    </footer>
+</body>
+</html>
