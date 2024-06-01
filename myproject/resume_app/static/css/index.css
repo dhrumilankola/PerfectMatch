@@ -1,7 +1,9 @@
 body, html {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
 }
 
 .navbar {
@@ -9,13 +11,7 @@ body, html {
     color: white;
     display: flex;
     justify-content: space-between;
-    padding: 10px 20px;.navbar {
-    background-color: #333;
-    color: white;
-    display: flex;
-    justify-content: space-between;
     padding: 10px 20px;
-}
 }
 
 .navbar a {
@@ -32,42 +28,154 @@ body, html {
 .logo {
     font-size: 24px;
     font-weight: bold;
+    color: #4b9ca1;
 }
 
 .main-content {
-    text-align: center;
-    padding: 20px;
-    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    width: 75%;  /* Adjusted width to 75% */
+    margin: 0 auto; /* Center the content */
 }
 
-.info-section img {
-    width: 100%;
-    max-width: 600px;
+.info-section {
+    background-color: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 75%;
+}
+
+.info-section h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.info-section p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    color: #666;
+}
+
+.responsive-img {
+    max-width: 100%;
     height: auto;
-    margin: 20px 0;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }
 
 .button {
-    display: inline-block;
-    padding: 10px 20px;
-    margin: 10px;
-    background-color: #007BFF;
+    background: #4b9ca1;
     color: white;
-    border-radius: 5px;
+    padding: 10px 20px;
+    border-radius: 30px;
+    box-shadow: -5px -5px 10px #fff, 5px 5px 15px rgba(0,0,0,0.1);
     text-decoration: none;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease;
+    font-size: 1.1em;
+    cursor: pointer;
 }
 
 .button:hover {
-    background-color: #0056b3;
+    background-color: #3a7c80;
+    box-shadow: -2px -2px 5px #fff, 2px 2px 5px rgba(0,0,0,0.1);
 }
 
-footer {
+.footer-content {
     background-color: #333;
     color: white;
     text-align: center;
     padding: 20px;
-    position: relative;
-    bottom: 0;
+}
+
+.footer-content a {
+    color: #4b9ca1;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.footer-content a:hover {
+    text-decoration: underline;
+}
+
+.centered-textarea {
     width: 100%;
+    max-width: 600px;
+    height: 150px;
+    margin: 20px 0;
+    padding: 15px;
+    background: #ececec;
+    border: none;
+    border-radius: 20px;
+    box-shadow: inset -2px -2px 5px #fff, inset 2px 2px 5px rgba(0,0,0,0.1);
+    color: #333;
+    font-size: 16px;
+    resize: none;
+}
+
+.centered-textarea:focus {
+    box-shadow: inset -1px -1px 2px #fff, inset 1px 1px 2px rgba(0,0,0,0.1);
+    outline: none;
+}
+
+.response-container {
+    background: #ececec;
+    width: 75%; /* Fill 75% of the screen width */
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: -5px -5px 10px #fff, 5px 5px 15px rgba(0,0,0,0.1);
+    color: #333;
+}
+
+.response {
+    white-space: pre-wrap; /* To handle preformatted text */
+    font-family: 'Poppins', Arial, sans-serif; /* Ensure consistent font-family */
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.response .markdown h1,
+.response .markdown h2,
+.response .markdown h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.response .markdown p {
+    margin: 10px 0;
+}
+
+.response .markdown ul {
+    list-style-type: disc;
+    margin: 10px 0 10px 20px;
+}
+
+.response .markdown ol {
+    list-style-type: decimal;
+    margin: 10px 0 10px 20px;
+}
+
+.response .markdown pre {
+    background: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+
+.response .markdown code {
+    background: #f4f4f4;
+    padding: 2px 4px;
+    border-radius: 3px;
 }

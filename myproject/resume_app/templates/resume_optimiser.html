@@ -1,68 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PerfectMatch CV</title>
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/resume.css' %}">
-</head>
-<body>
-    <header>
-        <nav class="navbar">
-            <div class="logo"><a href="/">PerfectMatch</a></div>
-            <div class="nav-links">
-                <a href="/resume-optimiser">Resume Optimiser</a>
-                <a href="/jd-analysis">JD Analysis</a>
-            </div>
-        </nav>
-    </header>
-    <section class="main-content">
-        <div class="info-section">
-            <h1 class="card-title text-center"> Paste the content you want to optimise! </h1>
+{% extends 'base.html' %}
+
+{% block title %}Resume Optimiser - PerfectMatch CV{% endblock %}
+
+{% block content %}
+<section class="main-content">
+    <div class="info-section">
+        <h1 class="card-title text-center"> Paste the content you want to optimise! </h1>
+        <form method="post">
+            {% csrf_token %}
             <div class="role-selectors">
                 <label class="role-button">
-                    <input type="radio" name="role" value="SDE" hidden />
+                    <input type="radio" name="role" value="SDE" />
                     <span>SDE</span>
                 </label>
                 <label class="role-button">
-                    <input type="radio" name="role" value="Data Science" hidden />
+                    <input type="radio" name="role" value="Data Science" />
                     <span>Data Science</span>
                 </label>
                 <label class="role-button">
-                    <input type="radio" name="role" value="Machine Learning/AI" hidden />
+                    <input type="radio" name="role" value="Machine Learning/AI" />
                     <span>Machine Learning/AI</span>
                 </label>
                 <label class="role-button">
-                    <input type="radio" name="role" value="Other" hidden />
+                    <input type="radio" name="role" value="Other" />
                     <span>Other</span>
                 </label>
             </div>
-            <form method="post">
-                {% csrf_token %}
+            <div class="input-container">
                 <div class="form-group">
-                    <textarea id="input" name="input" rows="4">{% if input %}{{ input }}{% endif %}</textarea>
+                    <textarea id="input" name="input" rows="4" class="centered-textarea">{% if input %}{{ input }}{% endif %}</textarea>
                 </div>
-                <div class="buttons">
+                <div class="buttons tailor-button">
                     <button type="submit" class="button">Tailor it!</button>
                 </div>
-            </form>
-            {% if response %}
-                <div class="response-container">
-                    <h2>Response:</h2>
-                    <div class="response">
-                        {{ response|safe }}
-                    </div>
+            </div>
+        </form>
+        {% if response %}
+            <div class="response-container centered-container">
+                <div class="response markdown">
+                    {{ response|safe }}
                 </div>
-            {% endif %}
-        </div>
-    </section>
-    <footer>
-        <div class="footer-content">
-            <p>Designed by Dhrumil Ankola</p>
-            <a href="https://www.linkedin.com/in/dhrumil-ankola/">LinkedIn</a>
-            <p>&copy; 2024 Dhrumil Ankola. All rights reserved.</p>
-        </div>
-    </footer>
-</body>
-</html>
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

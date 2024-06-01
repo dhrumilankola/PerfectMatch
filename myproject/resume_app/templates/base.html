@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}PerfectMatch CV{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/resume.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jd.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo"><a href="/">PerfectMatch</a></div>
+            <div class="nav-links">
+                <a href="/resume-optimiser">Resume Optimiser</a>
+                <a href="/jd-analysis">JD Analysis</a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <div class="footer-content">
+            <p>Designed by Dhrumil Ankola</p>
+            <a href="https://www.linkedin.com/in/dhrumil-ankola/">LinkedIn</a>
+            <p>&copy; 2024 Dhrumil Ankola. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

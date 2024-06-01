@@ -1,9 +1,8 @@
 body, html {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', Arial, sans-serif; /* Consistent font-family */
 }
-
 
 .navbar {
     background-color: #333;
@@ -39,6 +38,26 @@ body, html {
     width: 100%;
 }
 
+/* Centering container */
+.centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    margin: 0 auto;
+}
+
+/* Centering input-container */
+.input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+}
+
 /* Styling for buttons in the main content */
 .button {
     background: #4b9ca1;
@@ -57,9 +76,8 @@ body, html {
 }
 
 /* Styling for textarea */
-textarea {
-    width: 100%;
-    max-width: 600px;
+textarea.centered-textarea {
+    width: 600px; /* Fixed width of 600px */
     height: 150px;
     margin: 20px 0;
     padding: 15px;
@@ -69,10 +87,11 @@ textarea {
     box-shadow: inset -2px -2px 5px #fff, inset 2px 2px 5px rgba(0,0,0,0.1);
     color: #333;
     font-size: 16px;
+    font-family: Arial, sans-serif; /* Ensure consistent font-family */
     resize: none;
 }
 
-textarea:focus {
+textarea.centered-textarea:focus {
     box-shadow: inset -1px -1px 2px #fff, inset 1px 1px 2px rgba(0,0,0,0.1);
     outline: none;
 }
@@ -99,6 +118,8 @@ footer {
     box-shadow: -5px -5px 10px #fff, 5px 5px 15px rgba(0,0,0,0.1);
     cursor: pointer;
     transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
 }
 
 .role-button input[type="radio"] {
@@ -115,7 +136,71 @@ footer {
 }
 
 .role-button input[type="radio"]:checked + span {
-    color: #000;
-    background-color: #ddd;
+    color: white; /* Change text color for better contrast */
+    background-color: #4b9ca1; /* Change background color to #4b9ca1 */
     box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Ensuring entire button area, including padding, changes color */
+.role-button input[type="radio"]:checked + span {
+    background-color: #4b9ca1; /* Change background color to #4b9ca1 */
+    color: white; /* Change text color for better contrast */
+    box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.2);
+    padding: 10px 20px; /* Ensure padding is applied */
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+/* Styling for response container */
+.response-container {
+    background: #ececec;
+    width: 60%; /* Fill 60% of the screen width */
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: -5px -5px 10px #fff, 5px 5px 15px rgba(0,0,0,0.1);
+    color: #333;
+    font-family: Arial, sans-serif; /* Ensure consistent font-family */
+}
+
+.response {
+    white-space: pre-wrap; /* To handle preformatted text */
+    font-family: Arial, sans-serif; /* Ensure consistent font-family */
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.response .markdown h1,
+.response .markdown h2,
+.response .markdown h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.response .markdown p {
+    margin: 10px 0;
+}
+
+.response .markdown ul {
+    list-style-type: disc;
+    margin: 10px 0 10px 20px;
+}
+
+.response .markdown ol {
+    list-style-type: decimal;
+    margin: 10px 0 10px 20px;
+}
+
+.response .markdown pre {
+    background: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+
+.response .markdown code {
+    background: #f4f4f4;
+    padding: 2px 4px;
+    border-radius: 3px;
 }
