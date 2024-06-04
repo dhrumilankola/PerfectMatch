@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Cover Letter Generator - PerfectMatch CV{% endblock %}
+
+{% block content %}
+<section class="main-content">
+    <div class="info-section">
+        <h1 class="card-title text-center">Generate Your Cover Letter</h1>
+        <form id="cover-letter-form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="job_description">Job Description:</label>
+                <textarea id="job_description" name="job_description" rows="4" class="centered-textarea"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="resume_pdf">Upload Your Resume (PDF):</label>
+                <input type="file" id="resume_pdf" name="resume_pdf" accept=".pdf" class="form-control-file">
+            </div>
+            <div class="buttons tailor-button">
+                <button type="submit" class="button">Generate Cover Letter</button>
+            </div>
+        </form>
+        <div id="response-container" class="response-container centered-container" style="display: none;">
+            <div id="cover-letter" class="response markdown">
+                <h2>Cover Letter</h2>
+                <div id="cover-letter-content"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('#cover-letter-form').on('submit', function(event){
+        event.preventDefault();  // Prevent the default form submission
+
+        // Clear previous responses
+        $('#response-container').hide();
+        $('#cover-letter-content').html('');
+
+        // Create FormData object to handle file upload
+        var formData = new FormData(this);
+
+        // Send the data using AJAX to initiate analysis
+        $.ajax({
+            type: 'POST',
+            url: '{% url "cover_letter" %}',
+            data: formData,
+            contentType: false,  // Tell jQuery not to set contentType
+            processData: false,  // Tell jQuery not to process the data
+            success: function(response) {
+                $('#response-container').show();
+                $('#cover-letter-content').html(response.cover_letter);
+            },
+            error: function() {
+                alert('An error occurred. Please try again.');
+            }
+        });
+    });
+});
+</script>
+{% endblock %}

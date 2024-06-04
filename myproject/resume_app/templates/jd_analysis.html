@@ -6,25 +6,47 @@
 <section class="main-content">
     <div class="info-section">
         <h1 class="card-title text-center">Find out Important Keywords and Skillset required!</h1>
-        <form method="post">
+        <form id="analyze-form" method="post">
             {% csrf_token %}
             <div class="input-container">
-                <div class="form-group">
+                <div class="card-title form-group">
                     <label for="input">Paste the job description you want to analyze:</label>
-                    <textarea id="input" name="input" rows="4" class="centered-textarea">{% if input %}{{ input }}{% endif %}</textarea>
+                    <textarea id="input" name="input" rows="4" class="centered-textarea"></textarea>
                 </div>
                 <div class="buttons tailor-button">
                     <button type="submit" class="button">Analyze it!</button>
                 </div>
             </div>
         </form>
-        {% if response %}
-            <div class="response-container centered-container">
-                <div class="response markdown">
-                    {{ response|safe }}
-                </div>
-            </div>
-        {% endif %}
+        <div id="response-container" class="response-container centered-container" style="display: none;">
+            <div id="response" class="response markdown"></div>
+        </div>
     </div>
 </section>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('#analyze-form').on('submit', function(event){
+        event.preventDefault();  // Prevent the default form submission
+
+        // Serialize the form data
+        var formData = $(this).serialize();
+
+        // Send the data using AJAX
+        $.ajax({
+            type: 'POST',
+            url: '{% url "jd_analysis" %}',  // Update with the correct URL
+            data: formData,
+            success: function(response){
+                $('#response-container').show();
+                $('#response').html(response.response);
+            },
+            error: function(){
+                alert('An error occurred. Please try again.');
+            }
+        });
+    });
+});
+</script>
 {% endblock %}
