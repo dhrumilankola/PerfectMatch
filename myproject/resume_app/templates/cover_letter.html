@@ -25,6 +25,10 @@
                 <h2>Cover Letter</h2>
                 <div id="cover-letter-content"></div>
             </div>
+            <div id="resume-text" class="response markdown">
+                <h2>Extracted Resume Text</h2>
+                <div id="resume-text-content"></div>
+            </div>
         </div>
     </div>
 </section>
@@ -38,6 +42,7 @@ $(document).ready(function(){
         // Clear previous responses
         $('#response-container').hide();
         $('#cover-letter-content').html('');
+        $('#resume-text-content').html('');
 
         // Create FormData object to handle file upload
         var formData = new FormData(this);
@@ -52,9 +57,10 @@ $(document).ready(function(){
             success: function(response) {
                 $('#response-container').show();
                 $('#cover-letter-content').html(response.cover_letter);
+                $('#resume-text-content').html(response.resume_text);
             },
-            error: function() {
-                alert('An error occurred. Please try again.');
+            error: function(xhr) {
+                alert('An error occurred. Please try again. ' + xhr.responseText);
             }
         });
     });

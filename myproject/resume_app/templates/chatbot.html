@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Chatbot Q&A - PerfectMatch CV{% endblock %}
+
+{% block content %}
+<section class="chatbot-main-content">
+    <div class="chatbot-info-section">
+        <h1 class="chatbot-card-title text-center">Chatbot Q&A</h1>
+        <div class="chatbot-chat-container">
+            <div id="chat-history" class="chatbot-chat-history">
+                <div id="initial-message" class="chatbot-initial-message">Ask follow-up questions about your resume, job description, or career advice.</div>
+                <!-- Chat history will be dynamically updated here -->
+            </div>
+            <form id="chat-form" method="post" class="chatbot-form-group">
+                {% csrf_token %}
+                <div class="chatbot-chat-input-container">
+                    <textarea id="user-input" name="user_input" rows="1" class="chatbot-centered-textarea" placeholder="Ask follow-up questions..."></textarea>
+                    <button type="submit" class="chatbot-send-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="chatbot-feather-send">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M22 2L11 13M22 2L15 21l-4-8-8-4L22 2z"/>
+                        </svg>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/chatbot.css' %}">
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('#chat-form').on('submit', function(event){
+        event.preventDefault();  // Prevent the default form submission
+
+        // Get user input
+        var userInput = $('#user-input').val();
+
+        // Clear input field
+        $('#user-input').val('');
+
+        // Remove initial message if present
+        $('#initial-message').hide();
+
+        // Append user message to chat history
+        $('#chat-history').append('<div class="chatbot-chat-message chatbot-user-message">' + userInput + '</div>');
+
+        // Scroll to the bottom of chat history
+        $('#chat-history').scrollTop($('#chat-history')[0].scrollHeight);
+
+        // Send the data using AJAX to initiate chat
+        $.ajax({
+            type: 'POST',
+            url: '{% url "chatbot_interact" %}',
+            data: {
+                'user_input': userInput,
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            success: function(response) {
+                // Append bot response to chat history
+                $('#chat-history').append('<div class="chatbot-chat-message chatbot-bot-message">' + response.bot_response + '</div>');
+
+                // Scroll to the bottom of chat history
+                $('#chat-history').scrollTop($('#chat-history')[0].scrollHeight);
+            },
+            error: function() {
+                alert('An error occurred. Please try again.');
+            }
+        });
+    });
+
+    $('#user-input').on('input', function() {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';
+    });
+});
+</script>
+{% endblock %}
